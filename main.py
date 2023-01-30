@@ -34,8 +34,7 @@ def table_creation(database):
 
     cursor.execute(table_layout_schema)
 
-
-
+    return True
 
 def database_handler():
 
@@ -70,7 +69,63 @@ def database_handler():
         print("Failed to connect to database")
         return
 
-    table_creation(database)
+    if not table_creation(database):
+        print("Error creating table")
+
+    database.close()
+
+def get_user_info():
+
+    name = {}
+
+    name['username'] = input("What is your name: ")
+
+    scores = {"ICT":False, "Maths":False, "Physics":False}
+
+    for item in scores:
+
+        while not scores[item]:
+
+            score_out = input(f"{item} Score 1-100: ")
+
+            try:
+                score_out = int(score_out)
+                if score_out < 0 or score_out > 100:
+                    print("Incorrect range")
+                    continue
+
+                scores[item] = score_out
+                print(f"You scored {score_out} %")
+
+            except:
+
+                print("Incorrect score")
+
+    output = {**name, **scores}
+
+    return output
+
+
+def main_loop():
+
+    try:
+
+        database = mysql.connector.connect(
+            host = "localhost",
+            user = "root",
+            password = "Pa$$w0rd",
+            database = "scores"
+        )
+    except:
+        # Lazy error handling
+        print("Failed to connect to database")
+        return
+
+    get_user_info()
+
+
 
 
 database_handler()
+
+main_loop()
