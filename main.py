@@ -1,6 +1,7 @@
 import mysql.connector
 
 def database_creation(database):
+
     cursor = database.cursor()
     cursor.execute("SHOW DATABASES")
 
@@ -25,14 +26,15 @@ def table_creation(database):
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     name VARCHAR(20), 
     i_score INT, 
-    i_percent VARCHAR(4),
+    i_percent INT,
     m_score INT,
-    m_percent VARCHAR(4),
+    m_percent INT,
     p_score INT,
-    p_percent VARCHAR(4)
+    p_percent INT
     )''')
 
     cursor.execute(table_layout_schema)
+    cursor.reset()
 
     return True
 
@@ -108,6 +110,8 @@ def get_user_info():
 
 def main_loop():
 
+    database_handler()
+
     try:
 
         database = mysql.connector.connect(
@@ -121,11 +125,35 @@ def main_loop():
         print("Failed to connect to database")
         return
 
-    get_user_info()
+    cursor = database.cursor()
 
+    while True:
+        user_info = get_user_info()
 
+        entry = f'''INSERT INTO users (
+        name, 
+        i_score, 
+        i_percent,
+        m_score, 
+        m_percent, 
+        p_score, 
+        p_percent
+        ) VALUES (
+        '{user_info["username"]}', 
+        {user_info["ICT"]}, 
+        {user_info["ICT"]}, 
+        {user_info["Maths"]}, 
+        {user_info["Maths"]}, 
+        {user_info["Physics"]}, 
+        {user_info["Physics"]}
+        )'''
 
+        cursor.execute(entry)
 
-database_handler()
+        database.commit()
+
+        print("Added entry")
+
+        cursor.reset()
 
 main_loop()
