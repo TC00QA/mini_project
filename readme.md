@@ -7,6 +7,6 @@ validates the input them stores them in the local database instance
 
 ## Dependencies
 
-You need to install pymlsql
+You need to install pysql
 
 python -m pip install mysql-connector-python
