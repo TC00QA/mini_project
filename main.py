@@ -3,6 +3,8 @@ from sub_programs.info_gather import get_user_info
 
 def main_loop():
 
+    print("\n")
+
     database = database_handler()
 
     cursor = database.cursor()
@@ -33,10 +35,9 @@ def main_loop():
         )'''
 
         cursor.execute(entry)
-
         database.commit()
 
-        print("Added entry")
+        print("Added entry \n")
 
         cursor.reset()
 

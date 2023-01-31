@@ -5,11 +5,11 @@ def database_creation(database):
 
     for item in cursor:
         if "scores" in item:
-            print("Database Found")
+            print("Database Found \n")
             cursor.reset()
             return True
 
-    print("Database not found, creating")
+    print("Database not found, creating \n")
     cursor.execute("CREATE DATABASE scores")
     cursor.reset()
     return True
