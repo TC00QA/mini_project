@@ -1,7 +1,7 @@
 import mysql.connector
 
-from database_creation import database_creation
-from table_creation import table_creation
+from sub_programs.database_creation import database_creation
+from sub_programs.table_creation import table_creation
 
 def database_handler():
 
