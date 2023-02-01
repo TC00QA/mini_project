@@ -22,16 +22,16 @@ def main_loop():
         i_percent,
         m_score, 
         m_percent, 
-        p_score, 
-        p_percent
+        c_score, 
+        c_percent
         ) VALUES (
         '{user_info["username"]}', 
         {user_info["ICT"]}, 
         {user_info["ICT"]}, 
         {user_info["Maths"]}, 
         {user_info["Maths"]}, 
-        {user_info["Physics"]}, 
-        {user_info["Physics"]}
+        {user_info["Chemistry"]}, 
+        {user_info["Chemistry"]}
         )'''
 
         cursor.execute(entry)
